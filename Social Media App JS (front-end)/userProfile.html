@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+
+    <!-- IMPORT BOOTSTRAP -->
+     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>صفحة المستخدم</title>
+  <style>
+   
+    body{
+         background: linear-gradient(135deg, #1e1e1e, #301d3d);
+         color: #ffffff;
+         /* background-color: beige; */
+         margin: 0;
+    }
+    .btn:hover {
+    transform: scale(1.2);
+    transition: all 0.5s ease;
+    }
+
+
+    #userProfile {
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    #userProfile img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    #username {
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+
+    #bio {
+      margin-bottom: 30px;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+  </style>
+</head>
+<body>
+    <!-- ALERTS -->
+      <div id="LoginAlert" class="show fade" style="position: fixed; bottom: 0px; right:0px ;"></div>
+       <div id="LogoutAlert" class="show fade" style="position: fixed; bottom: 0px; right:0px ;"></div>
+        <div id="CreatePostAlert" class="show fade" style="position: fixed; bottom: 0px; right:0px ;"></div>
+         <div id="EditPostAlert" class="show fade" style="position: fixed; bottom: 0px; right:0px ;"></div>
+      <!--//ALERTS  -->
+      
+    <!-- ==========MODALS========= -->
+       <!-- Login Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true" style="display: none;" data-bs-theme="dark">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                        <div class="mb-3">
+                            <label for="username-input" class="col-form-label">Username</label>
+                            <input type="text" class="form-control" id="username-input">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password-input" class="col-form-label">Password</label>
+                            <input type="password" class="form-control" id="password-input"></input>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        
+                        <button id="login" type="button" class="btn btn-primary" data-bs-dismiss="modal">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <!-- //Login Modal -->
+        <!-- SignUp Modal -->
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true" style="display: none ;" data-bs-theme="dark" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Signup</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body">
+                        <form>
+                         <div>
+                            <label class="btn btn-light">
+                                <input id="profileImage" type="file">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-person" viewBox="0 0 16 16">
+                                <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                                </svg>
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name">
+                        </div>   
+                        <div class="mb-3">
+                            <label for="new_username" class="col-form-label">Username</label>
+                            <input type="text" class="form-control" id="new_username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="col-form-label">Email</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="new_password" class="col-form-label">Password</label>
+                            <input type="password" class="form-control" id="new_password"></input>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button id="signup" type="button" class="btn btn-primary" data-bs-dismiss="modal">Signup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       <!-- //SignUp Modal -->
+
+       <!-- Create Post Modal -->
+        <div class="modal fade" id="CreatePostModal" tabindex="-1" aria-labelledby="CreatePostModalLabel" aria-hidden="true" style="display: none ;" data-bs-theme="dark" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Create New Post</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body">
+                        <form>
+                        <div class="mb-3">
+                            <textarea class="form-control mb-2"id="postBody" placeholder="What's on your mind?"></textarea>
+                        </div>   
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">              
+                        <label class="btn btn-light">
+                            <input id="postImage" type="file">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-file-earmark-image" viewBox="0 0 16 16">
+                            <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                            <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1z"/>
+                            </svg>
+                        </label>
+                        <button class="btn btn-primary" id="createPost">Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- //Create Post Modal -->     
+
+        <!-- Edit Post Modal -->
+        <div class="modal fade" id="EditPostModal" tabindex="-1" aria-labelledby="EditPostModalLabel" aria-hidden="true" style="display: none ;" data-bs-theme="dark" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Post</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    <div class="modal-body">
+                        <form>
+                        <div class="mb-3">
+                            <textarea class="form-control mb-2"id="newpostBody"></textarea>
+                        </div>   
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">              
+                        <label class="btn btn-light">
+                            <input id="newpostImage" type="file">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-file-earmark-image" viewBox="0 0 16 16">
+                            <path d="M6.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                            <path d="M14 14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zM4 1a1 1 0 0 0-1 1v10l2.224-2.224a.5.5 0 0 1 .61-.075L8 11l2.157-3.02a.5.5 0 0 1 .76-.063L13 10V4.5h-2A1.5 1.5 0 0 1 9.5 3V1z"/>
+                            </svg>
+                        </label>
+                        <button class="btn btn-primary" id="editPost">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- //Edit Post Modal -->    
+    <!-- ==========//MODALS======= -->
+
+    <!-- NAV BAR CONT -->
+    <div class="d-flex">
+        <!-- SIDEBAR -->
+        <div style="height: 100vh; position: fixed; top: 0;" >
+            <nav class="nav" style="background-color:#1e1e1e;" data-bs-theme="dark">
+            <div class="d-flex flex-column " style="height: 100vh;">
+                    <div id="content" class="d-flex flex-column align-items-center justify-content-center h-100 ">
+                        <a class="nav-link active " aria-current="page" href="home.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                            <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+                            </svg>
+                        </a>
+                    </div>
+                  <div id="signin_up" class="d-flex flex-column align-items-center justify-content-end w-100 pb-3 h-100">
+                        <button class="btn btn-dark " type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+                                <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-dark mt-3" type="submit" data-bs-toggle="modal" data-bs-target="#signupModal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
+                            <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/>
+                            <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117M11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5M4 1.934V15h6V1.077z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>       
+            </nav>
+        </div>  
+            <!-- //SIDEBAR -->
+        <div class="col">
+             <div style="position: fixed; z-index: 1; width: 100vw;" >
+                <!-- NAV BAR -->
+                <nav class="navbar navbar-expand-lg mb-5 pt-3 " style="background-color:#1e1e1e;" data-bs-theme="dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="home.html">Pixora</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <button class="btn btn-dark" type="submit" data-bs-toggle="modal" style="background: none; border: none; " data-bs-target="#CreatePostModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square-dotted" viewBox="0 0 16 16">
+                                    <path d="M2.5 0q-.25 0-.487.048l.194.98A1.5 1.5 0 0 1 2.5 1h.458V0zm2.292 0h-.917v1h.917zm1.833 0h-.917v1h.917zm1.833 0h-.916v1h.916zm1.834 0h-.917v1h.917zm1.833 0h-.917v1h.917zM13.5 0h-.458v1h.458q.151 0 .293.029l.194-.981A2.5 2.5 0 0 0 13.5 0m2.079 1.11a2.5 2.5 0 0 0-.69-.689l-.556.831q.248.167.415.415l.83-.556zM1.11.421a2.5 2.5 0 0 0-.689.69l.831.556c.11-.164.251-.305.415-.415zM16 2.5q0-.25-.048-.487l-.98.194q.027.141.028.293v.458h1zM.048 2.013A2.5 2.5 0 0 0 0 2.5v.458h1V2.5q0-.151.029-.293zM0 3.875v.917h1v-.917zm16 .917v-.917h-1v.917zM0 5.708v.917h1v-.917zm16 .917v-.917h-1v.917zM0 7.542v.916h1v-.916zm15 .916h1v-.916h-1zM0 9.375v.917h1v-.917zm16 .917v-.917h-1v.917zm-16 .916v.917h1v-.917zm16 .917v-.917h-1v.917zm-16 .917v.458q0 .25.048.487l.98-.194A1.5 1.5 0 0 1 1 13.5v-.458zm16 .458v-.458h-1v.458q0 .151-.029.293l.981.194Q16 13.75 16 13.5M.421 14.89c.183.272.417.506.69.689l.556-.831a1.5 1.5 0 0 1-.415-.415zm14.469.689c.272-.183.506-.417.689-.69l-.831-.556c-.11.164-.251.305-.415.415l.556.83zm-12.877.373Q2.25 16 2.5 16h.458v-1H2.5q-.151 0-.293-.029zM13.5 16q.25 0 .487-.048l-.194-.98A1.5 1.5 0 0 1 13.5 15h-.458v1zm-9.625 0h.917v-1h-.917zm1.833 0h.917v-1h-.917zm1.834-1v1h.916v-1zm1.833 1h.917v-1h-.917zm1.833 0h.917v-1h-.917zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+                                    </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <form class="d-flex w-25" role="search">
+                            <input id="searchBar" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button id="searchBtn" class="btn btn-dark" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </button>
+                    </form>
+
+                    <div id="currentUser" class="d-flex align-items-center justify-content-end w-25 px-3 mx-3">
+                        <img class="border border-1 rounded-circle" style="width: 2vw; height: 4vh;" src="./pictures/user-profile.webp">
+                        <b class="nav-link active mx-3" aria-current="page">Guest</b>
+                    </div>
+                </nav> 
+                <!--//NAV BAR  -->
+              </div>   
+                <!-- MAIN CONT -->
+                    <div class="container" style="overflow-y: auto;">
+                        <div class="d-flex justify-content-center" >
+                            <div class="col-6">
+                            <section id="userProfile">
+                            </section>
+
+                            
+                            <section id="userPosts">
+                            </section>
+
+                        </div>
+                    
+                </div>
+                    <!--//MAIN CONT -->
+           </div>
+    </div>
+       
+    
+    <!--//NAV BAR CONT -->
+
+</body>
+</html>
+
+
+<script src="./js/userProfile.js" ></script>
+<script src="./js/postDetails.js"></script>
+<script src="./js/login.js"></script>
+</html>
